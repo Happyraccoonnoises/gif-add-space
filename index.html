@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GIF Add Space</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Projektseite für GIF Add Space und weitere Experimente.">
+
+  <meta property="og:title" content="GIF Add Space">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Projektseite für GIF Add Space und weitere Experimente.">
+  <!-- später eigene URL einsetzen -->
+  <meta property="og:url" content="https://deine-domain.de">
+  <meta property="og:image" content="https://deine-domain.de/og-image.jpg">
+  <meta property="og:image:alt" content="Logo GIF Add Space">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<header>
+  <h1>GIF Add Space</h1>
+  <p>Eine Projektseite für Tools, Ideen und Experimente.</p>
+</header>
+
+<main>
+  <section>
+    <h2>Über das Projekt</h2>
+    <p>Hier entsteht die erste Version meiner Webseite.</p>
+  </section>
+
+  <!-- ➤ Abschnitt für Spende / GIF-Upload (nur HTML/Struktur) -->
+  <section class="donation">
+    <h2>Spende & GIF‑Upload</h2>
+    <p>Unterstütze das Projekt und lade ein GIF hoch, das auf der Party gezeigt wird.</p>
+    <button id="sumup-button" type="button">Spende für GIF‑Upload</button>
+    <div id="upload-form" class="upload-form hidden">
+      <p>Upload nach erfolgreicher Spende.</p>
+      <form id="gif-upload-form">
+        <label for="gif-file">GIF‑Datei</label>
+        <input type="file" id="gif-file" name="gif" accept="image/gif" required>
+        <button type="submit">GIF hochladen</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
