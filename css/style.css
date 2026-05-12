@@ -121,6 +121,16 @@ textarea {
   font-size: 0.95rem;
 }
 
+#checkout-status {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #9ae6b4;
+  font-size: 0.95rem;
+}
+
 /* Responsive für kleinere Bildschirme */
 @media (max-width: 768px) {
   body {

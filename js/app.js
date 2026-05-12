@@ -2,10 +2,40 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sumupButton = document.getElementById("sumup-button");
   const uploadForm = document.getElementById("upload-form");
   const backendStatus = document.getElementById("backend-status");
+  const checkoutStatus = document.getElementById("checkout-status");
 
   if (sumupButton) {
-    sumupButton.addEventListener("click", () => {
-      alert("Hier startet später der Zahlungsflow (z.B. SumUp Checkout).");
+    sumupButton.addEventListener("click", async () => {
+      try {
+        if (checkoutStatus) {
+          checkoutStatus.textContent = "Checkout-Status: wird erstellt...";
+        }
+
+        const checkoutResponse = await fetch("http://localhost:3000/payments/create-checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            amount: 5,
+            description: "Test-Spende für GIF Add Space"
+          })
+        });
+
+        const checkoutData = await checkoutResponse.json();
+        console.log("Checkout-Antwort:", checkoutData);
+
+        if (checkoutStatus) {
+          checkoutStatus.textContent = `Checkout-Status: ${checkoutData.checkout.status} (${checkoutData.checkout.id})`;
+        }
+
+      } catch (error) {
+        console.error("Fehler beim Checkout-Test:", error);
+
+        if (checkoutStatus) {
+          checkoutStatus.textContent = "Checkout-Status: Fehler beim Erstellen";
+        }
+      }
     });
   }
 
@@ -45,6 +75,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (backendStatus) {
       backendStatus.textContent = "Backend-Status: nicht erreichbar";
+    }
+
+    if (checkoutStatus) {
+      checkoutStatus.textContent = "Checkout-Status: Backend nicht verbunden";
     }
   }
 });
