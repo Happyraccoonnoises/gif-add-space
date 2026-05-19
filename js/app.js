@@ -1,9 +1,19 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  // =========================
+  // Elemente aus dem DOM holen
+  // =========================
   const sumupButton = document.getElementById("sumup-button");
-  const uploadForm = document.getElementById("upload-form");
+  const uploadContainer = document.getElementById("upload-form");
+  const gifUploadForm = document.getElementById("gif-upload-form");
   const backendStatus = document.getElementById("backend-status");
   const checkoutStatus = document.getElementById("checkout-status");
+  const uploadStatus = document.getElementById("upload-status");
+  const latestGifStatus = document.getElementById("latest-gif-status");
+  const latestGifImage = document.getElementById("latest-gif-image");
 
+  // =========================
+  // SumUp Checkout vorbereiten
+  // =========================
   if (sumupButton) {
     sumupButton.addEventListener("click", async () => {
       try {
@@ -25,10 +35,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         const checkoutData = await checkoutResponse.json();
         console.log("Checkout-Antwort:", checkoutData);
 
-        if (checkoutStatus) {
-          checkoutStatus.textContent = `Checkout-Status: ${checkoutData.checkout.status} (${checkoutData.checkout.id})`;
+        if (!checkoutData.success) {
+          if (checkoutStatus) {
+            checkoutStatus.textContent = `Checkout-Status: ${checkoutData.message}`;
+          }
+          return;
         }
 
+        if (checkoutStatus) {
+          if (checkoutData.checkoutDraft) {
+            checkoutStatus.textContent = `Checkout-Status: vorbereitet (${checkoutData.checkoutDraft.checkout_reference})`;
+          } else if (checkoutData.checkout) {
+            checkoutStatus.textContent = `Checkout-Status: ${checkoutData.checkout.status} (${checkoutData.checkout.id})`;
+          } else {
+            checkoutStatus.textContent = "Checkout-Status: erfolgreich vorbereitet";
+          }
+        }
       } catch (error) {
         console.error("Fehler beim Checkout-Test:", error);
 
@@ -39,13 +61,100 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  if (uploadForm) {
-    uploadForm.addEventListener("submit", (e) => {
+  // =========================
+  // GIF-Upload ans Backend senden
+  // =========================
+  if (gifUploadForm) {
+    gifUploadForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      alert("Hier kommt später das GIF-Upload-Handling (über Backend).");
+
+      const formData = new FormData(gifUploadForm);
+
+      try {
+        if (uploadStatus) {
+          uploadStatus.textContent = "Upload-Status: Datei wird hochgeladen...";
+        }
+
+        const response = await fetch("http://localhost:3000/uploads/gif", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+        console.log("Upload-Antwort:", data);
+
+        if (!response.ok || !data.success) {
+          if (uploadStatus) {
+            uploadStatus.textContent = `Upload-Status: ${data.message || "Fehler beim Upload"}`;
+          }
+          return;
+        }
+
+        if (uploadStatus) {
+          uploadStatus.textContent = `Upload-Status: erfolgreich (${data.file.storedName})`;
+        }
+
+        await loadLatestGif();
+      } catch (error) {
+        console.error("Fehler beim Upload:", error);
+
+        if (uploadStatus) {
+          uploadStatus.textContent = "Upload-Status: Backend nicht erreichbar";
+        }
+      }
     });
   }
 
+  // =========================
+  // Neuestes GIF laden
+  // =========================
+  async function loadLatestGif() {
+    try {
+      if (latestGifStatus) {
+        latestGifStatus.textContent = "Anzeige-Status: lade neuestes GIF...";
+      }
+
+      const response = await fetch("http://localhost:3000/uploads/latest");
+      const data = await response.json();
+
+      if (!response.ok || !data.success || !data.latestGif) {
+        if (latestGifStatus) {
+          latestGifStatus.textContent = "Anzeige-Status: noch kein GIF vorhanden";
+        }
+
+        if (latestGifImage) {
+          latestGifImage.style.display = "none";
+        }
+
+        return;
+      }
+
+      const imageUrl = `http://localhost:3000${data.latestGif.path}?t=${Date.now()}`;
+
+      if (latestGifImage) {
+        latestGifImage.src = imageUrl;
+        latestGifImage.style.display = "block";
+      }
+
+      if (latestGifStatus) {
+        latestGifStatus.textContent = `Anzeige-Status: geladen (${data.latestGif.name})`;
+      }
+    } catch (error) {
+      console.error("Fehler beim Laden des neuesten GIFs:", error);
+
+      if (latestGifStatus) {
+        latestGifStatus.textContent = "Anzeige-Status: Fehler beim Laden";
+      }
+
+      if (latestGifImage) {
+        latestGifImage.style.display = "none";
+      }
+    }
+  }
+
+  // =========================
+  // Backend-Verbindung testen
+  // =========================
   try {
     const response = await fetch("http://localhost:3000/api/ping");
     const data = await response.json();
@@ -69,7 +178,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const postData = await postResponse.json();
     console.log("POST-Antwort:", postData);
-
   } catch (error) {
     console.error("Fehler beim Verbinden mit dem Backend:", error);
 
@@ -80,5 +188,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (checkoutStatus) {
       checkoutStatus.textContent = "Checkout-Status: Backend nicht verbunden";
     }
+
+    if (uploadStatus) {
+      uploadStatus.textContent = "Upload-Status: Backend nicht verbunden";
+    }
+
+    if (latestGifStatus) {
+      latestGifStatus.textContent = "Anzeige-Status: Backend nicht verbunden";
+    }
   }
+
+  // =========================
+  // Beim Laden der Seite direkt
+  // das neueste GIF anzeigen
+  // =========================
+  await loadLatestGif();
 });

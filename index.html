@@ -11,7 +11,6 @@
   <meta property="og:title" content="GIF Add Space">
   <meta property="og:type" content="website">
   <meta property="og:description" content="Projektseite für GIF Add Space und weitere Experimente.">
-  <!-- später eigene URL einsetzen -->
   <meta property="og:url" content="https://deine-domain.de">
   <meta property="og:image" content="https://deine-domain.de/og-image.jpg">
   <meta property="og:image:alt" content="Logo GIF Add Space">
@@ -32,32 +31,66 @@
 </header>
 
 <main>
+  <!-- ========================= -->
+  <!-- Projektbeschreibung       -->
+  <!-- ========================= -->
   <section>
     <h2>Über das Projekt</h2>
     <p>Hier entsteht die erste Version meiner Webseite.</p>
   </section>
 
-  <!-- ➤ Abschnitt für Spende / GIF-Upload (nur HTML/Struktur) -->
+  <!-- ========================= -->
+  <!-- Spende & GIF-Upload       -->
+  <!-- Heute im Testmodus offen  -->
+  <!-- ========================= -->
   <section class="donation">
-    <h2>Spende & GIF‑Upload</h2>
+    <h2>Spende & GIF-Upload</h2>
     <p>Unterstütze das Projekt und lade ein GIF hoch, das auf der Party gezeigt wird.</p>
-    <button id="sumup-button" type="button">Spende für GIF‑Upload</button>
-    <div id="upload-form" class="upload-form hidden">
-      <p>Upload nach erfolgreicher Spende.</p>
+
+    <button id="sumup-button" type="button">Spende für GIF-Upload</button>
+
+    <div id="upload-form" class="upload-form">
+      <p>Testmodus: Der Upload ist aktuell direkt sichtbar, damit wir das Frontend sauber prüfen können.</p>
+
       <form id="gif-upload-form">
-        <label for="gif-file">GIF‑Datei</label>
-        <input type="file" id="gif-file" name="gif" accept="image/gif" required>
+        <label for="gif-file">GIF-Datei</label>
+        <input
+          type="file"
+          id="gif-file"
+          name="gifFile"
+          accept=".gif,image/gif"
+          required
+        >
+
         <button type="submit">GIF hochladen</button>
       </form>
+
+      <p id="upload-status">Upload-Status: noch kein Upload</p>
     </div>
   </section>
 </main>
 
+<!-- ========================= -->
+<!-- Aktuell angezeigtes GIF   -->
+<!-- ========================= -->
+<section class="latest-gif-section">
+  <h2>Neuestes GIF</h2>
+  <p id="latest-gif-status">Anzeige-Status: noch kein GIF geladen</p>
+  <img
+    id="latest-gif-image"
+    src=""
+    alt="Das zuletzt hochgeladene GIF"
+    style="max-width: 100%; display: none;"
+  >
+</section>
+
+<!-- ========================= -->
+<!-- Statusanzeigen            -->
+<!-- ========================= -->
 <p id="backend-status">Backend-Status: wird geprüft...</p>
 <p id="checkout-status">Checkout-Status: noch nicht getestet</p>
 
 <script src="js/app.js"></script>
-
 </body>
 
 </html>
