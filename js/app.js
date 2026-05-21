@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const uploadStatus = document.getElementById("upload-status");
   const latestGifStatus = document.getElementById("latest-gif-status");
   const latestGifImage = document.getElementById("latest-gif-image");
+  const API_BASE_URL = "https://gif-space-backend.onrender.com";
 
   // =========================
   // SumUp Checkout vorbereiten
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           checkoutStatus.textContent = "Checkout-Status: wird erstellt...";
         }
 
-        const checkoutResponse = await fetch("http://localhost:3000/payments/create-checkout", {
+        const checkoutResponse = await fetch(`${API_BASE_URL}/payments/create-checkout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           uploadStatus.textContent = "Upload-Status: Datei wird hochgeladen...";
         }
 
-        const response = await fetch("http://localhost:3000/uploads/gif", {
+        const response = await fetch(`${API_BASE_URL}/uploads/gif`, {
           method: "POST",
           body: formData
         });
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         latestGifStatus.textContent = "Anzeige-Status: lade neuestes GIF...";
       }
 
-      const response = await fetch("http://localhost:3000/uploads/latest");
+      const response = await fetch(`${API_BASE_URL}/uploads/latest`);
       const data = await response.json();
 
       if (!response.ok || !data.success || !data.latestGif) {
@@ -129,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      const imageUrl = `http://localhost:3000${data.latestGif.path}?t=${Date.now()}`;
+      const imageUrl = `${API_BASE_URL}${data.latestGif.path}?t=${Date.now()}`;
 
       if (latestGifImage) {
         latestGifImage.src = imageUrl;
@@ -156,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Backend-Verbindung testen
   // =========================
   try {
-    const response = await fetch("http://localhost:3000/api/ping");
+    const response = await fetch(`${API_BASE_URL}/api/ping`);
     const data = await response.json();
     console.log("Backend-Antwort:", data);
 
@@ -164,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       backendStatus.textContent = "Backend-Status: verbunden";
     }
 
-    const postResponse = await fetch("http://localhost:3000/api/test", {
+    const postResponse = await fetch(`${API_BASE_URL}/api/test`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
