@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_BASE_URL = "https://gif-space-backend.onrender.com";
   let currentGifUrl = null;
   let currentGifName = "latest-gif.gif";
+  let currentGifPath = null;
 
   if (gifUploadForm) {
     gifUploadForm.addEventListener("submit", async (event) => {
@@ -52,10 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadLatestGif() {
     try {
-      if (latestGifStatus) {
-        latestGifStatus.textContent = "Anzeige-Status: lade neuestes GIF...";
-      }
-
       const response = await fetch(`${API_BASE_URL}/uploads/latest`, {
         cache: "no-store"
       });
@@ -73,6 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
           downloadGifButton.style.display = "none";
         }
 
+        currentGifUrl = null;
+        currentGifPath = null;
         return;
       }
 
@@ -91,15 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
           downloadGifButton.style.display = "none";
         }
 
+        currentGifUrl = null;
+        currentGifPath = null;
         return;
       }
 
       currentGifName = data.latestGif.name || "latest-gif.gif";
       currentGifUrl = `${API_BASE_URL}${data.latestGif.path}`;
 
-      if (latestGifImage) {
-        latestGifImage.src = `${currentGifUrl}?t=${Date.now()}`;
-        latestGifImage.style.display = "block";
+      if (data.latestGif.path !== currentGifPath) {
+        currentGifPath = data.latestGif.path;
+
+        if (latestGifImage) {
+          latestGifImage.src = `${currentGifUrl}?t=${Date.now()}`;
+          latestGifImage.style.display = "block";
+        }
       }
 
       if (latestGifStatus) {
@@ -114,14 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (latestGifStatus) {
         latestGifStatus.textContent = "Anzeige-Status: Fehler beim Laden";
-      }
-
-      if (latestGifImage) {
-        latestGifImage.style.display = "none";
-      }
-
-      if (downloadGifButton) {
-        downloadGifButton.style.display = "none";
       }
     }
   }
@@ -155,4 +152,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadLatestGif();
+  setInterval(loadLatestGif, 30000);
 });
