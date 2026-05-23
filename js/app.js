@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const latestGifImage = document.getElementById("latest-gif-image");
   const downloadGifButton = document.getElementById("download-gif-button");
 
+
   const API_BASE_URL = "https://gif-space-backend.onrender.com";
   let currentGifUrl = null;
   let currentGifName = "latest-gif.gif";

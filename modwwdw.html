@@ -235,8 +235,12 @@
     <p id="mod-status" class="status-line">Verbinde...</p>
 
     <div class="button-row">
-      <button id="skip-button" class="button button-primary" type="button">
+      <button id="skip-button" class="button button-secondary" type="button">
         Skip current GIF
+      </button>
+
+      <button id="blacklist-button" class="button button-primary" type="button">
+        Blacklist + Skip
       </button>
 
       <button id="refresh-button" class="button button-secondary" type="button">
@@ -258,6 +262,7 @@
   const statusLine = document.getElementById("mod-status");
   const refreshButton = document.getElementById("refresh-button");
   const skipButton = document.getElementById("skip-button");
+  const blacklistButton = document.getElementById("blacklist-button");
 
   let currentGifPath = null;
   let isBusy = false;
@@ -276,10 +281,15 @@
   function setButtonsDisabled(disabled) {
     refreshButton.disabled = disabled;
     skipButton.disabled = disabled;
+    blacklistButton.disabled = disabled;
+
     refreshButton.style.opacity = disabled ? "0.6" : "1";
     skipButton.style.opacity = disabled ? "0.6" : "1";
+    blacklistButton.style.opacity = disabled ? "0.6" : "1";
+
     refreshButton.style.cursor = disabled ? "not-allowed" : "pointer";
     skipButton.style.cursor = disabled ? "not-allowed" : "pointer";
+    blacklistButton.style.cursor = disabled ? "not-allowed" : "pointer";
   }
 
   async function loadCurrentGif(forceRefresh = false) {
@@ -371,6 +381,33 @@
     } catch (error) {
       console.error(error);
       statusLine.textContent = error.message || "Fehler beim Skippen";
+    } finally {
+      isBusy = false;
+      setButtonsDisabled(false);
+    }
+  });
+
+  blacklistButton.addEventListener("click", async () => {
+    try {
+      isBusy = true;
+      setButtonsDisabled(true);
+      statusLine.textContent = "Aktuelles GIF wird geblacklistet...";
+
+      const response = await fetch(`${API_BASE_URL}/moderation/blacklist-current`, {
+        method: "POST"
+      });
+
+      const data = await parseResponseSafely(response);
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Blacklist fehlgeschlagen");
+      }
+
+      statusLine.textContent = `Geblacklistet: ${data.blacklistedFile}`;
+      await loadCurrentGif(true);
+    } catch (error) {
+      console.error(error);
+      statusLine.textContent = error.message || "Fehler beim Blacklisten";
     } finally {
       isBusy = false;
       setButtonsDisabled(false);
