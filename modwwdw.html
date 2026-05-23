@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIF Add Space — Mod</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+
+    :root {
+      --color-black: #000000;
+      --color-light: #E3F1E6;
+      --color-dark-green: #172524;
+      --color-pink: #f3e2de;
+      --color-white: #ffffff;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 1rem;
+      font-family: Arial, sans-serif;
+      color: var(--color-light);
+      background:
+        radial-gradient(circle at top left, rgba(243, 226, 222, 0.08), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(227, 241, 230, 0.06), transparent 28%),
+        var(--color-black);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .mod-shell {
+      width: min(100%, 720px);
+      margin: 0 auto;
+      padding: 1.25rem;
+      border: 1px solid rgba(227, 241, 230, 0.14);
+      border-radius: var(--radius-xl);
+      background: rgba(23, 37, 36, 0.88);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+    }
+
+    .mod-header {
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.75rem;
+      color: var(--color-pink);
+      font-family: 'Allerta Stencil', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mod-title {
+      margin-bottom: 0.75rem;
+      color: var(--color-white);
+      font-family: 'Allerta Stencil', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1;
+    }
+
+    .mod-text {
+      color: rgba(227, 241, 230, 0.82);
+      font-size: 1rem;
+      max-width: 56ch;
+    }
+
+    .preview-card {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border: 1px solid rgba(227, 241, 230, 0.12);
+      border-radius: var(--radius-lg);
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .preview-label {
+      margin-bottom: 0.75rem;
+      color: var(--color-pink);
+      font-family: 'Allerta Stencil', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .preview-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(227, 241, 230, 0.1);
+      overflow: hidden;
+    }
+
+    .preview-stage img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .preview-placeholder {
+      padding: 2rem;
+      text-align: center;
+      color: rgba(227, 241, 230, 0.62);
+      font-size: 1rem;
+    }
+
+    .meta-card {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid rgba(227, 241, 230, 0.12);
+      border-radius: var(--radius-lg);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .status-line {
+      color: rgba(227, 241, 230, 0.82);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .button {
+      border: none;
+      border-radius: 999px;
+      padding: 1rem 1.1rem;
+      font-family: 'Allerta Stencil', sans-serif;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform var(--transition), opacity var(--transition), box-shadow var(--transition);
+    }
+
+    .button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--color-pink);
+      color: #172524;
+      box-shadow: 0 10px 24px rgba(243, 226, 222, 0.16);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--color-light);
+      border: 1px solid rgba(227, 241, 230, 0.2);
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .hint {
+      margin-top: 0.9rem;
+      color: rgba(227, 241, 230, 0.58);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .mod-shell {
+        padding: 1rem;
+      }
+
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-stage {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+<main class="mod-shell">
+  <header class="mod-header">
+    <p class="eyebrow">Frequenz Kollektiv presents</p>
+    <h1 class="mod-title">Mod HUD</h1>
+    <p class="mod-text">
+      Vorschau und einfache Moderation für das aktuell angezeigte GIF.
+    </p>
+  </header>
+
+  <section class="preview-card">
+    <p class="preview-label">Current GIF</p>
+
+    <div class="preview-stage">
+      <img id="mod-preview-image" src="" alt="Aktuelles GIF in der Moderation" />
+      <div id="mod-preview-placeholder" class="preview-placeholder">
+        Noch kein GIF geladen.
+      </div>
+    </div>
+  </section>
+
+  <section class="meta-card">
+    <p id="mod-status" class="status-line">Verbinde...</p>
+
+    <div class="button-row">
+      <button id="skip-button" class="button button-primary" type="button">
+        Skip current GIF
+      </button>
+
+      <button id="refresh-button" class="button button-secondary" type="button">
+        Refresh
+      </button>
+    </div>
+
+    <p class="hint">
+      Heute erstmal nur als einfache versteckte Moderationsseite. Später kannst du hier Login, Blacklist und Verlauf ergänzen.
+    </p>
+  </section>
+</main>
+
+<script>
+  const API_BASE_URL = "https://gif-space-backend.onrender.com";
+
+  const previewImage = document.getElementById("mod-preview-image");
+  const previewPlaceholder = document.getElementById("mod-preview-placeholder");
+  const statusLine = document.getElementById("mod-status");
+  const refreshButton = document.getElementById("refresh-button");
+  const skipButton = document.getElementById("skip-button");
+
+  let currentGifPath = null;
+  let isBusy = false;
+
+  async function parseResponseSafely(response) {
+    const contentType = response.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      return response.json();
+    }
+
+    const text = await response.text();
+    return { success: false, message: text || "Unbekannte Serverantwort" };
+  }
+
+  function setButtonsDisabled(disabled) {
+    refreshButton.disabled = disabled;
+    skipButton.disabled = disabled;
+    refreshButton.style.opacity = disabled ? "0.6" : "1";
+    skipButton.style.opacity = disabled ? "0.6" : "1";
+    refreshButton.style.cursor = disabled ? "not-allowed" : "pointer";
+    skipButton.style.cursor = disabled ? "not-allowed" : "pointer";
+  }
+
+  async function loadCurrentGif(forceRefresh = false) {
+    if (isBusy && !forceRefresh) {
+      return;
+    }
+
+    try {
+      statusLine.textContent = "Lade aktuelles GIF...";
+
+      const response = await fetch(`${API_BASE_URL}/uploads/latest`, {
+        cache: "no-store"
+      });
+
+      const data = await parseResponseSafely(response);
+
+      if (!response.ok || !data.success || !data.latestGif) {
+        if (response.status === 404) {
+          currentGifPath = null;
+          previewImage.style.display = "none";
+          previewPlaceholder.style.display = "block";
+          statusLine.textContent = "Kein GIF und kein Fallback gefunden";
+          return;
+        }
+
+        throw new Error(data.message || "Fehler beim Laden des aktuellen GIFs");
+      }
+
+      const nextPath = data.latestGif.path;
+      const shouldUpdate = forceRefresh || nextPath !== currentGifPath;
+
+      currentGifPath = nextPath;
+
+      if (shouldUpdate) {
+        previewImage.src = `${API_BASE_URL}${nextPath}?t=${Date.now()}`;
+      }
+
+      previewImage.style.display = "block";
+      previewPlaceholder.style.display = "none";
+
+      if (data.latestGif.isFallback) {
+        statusLine.textContent = `Fallback aktiv: ${nextPath}`;
+      } else {
+        statusLine.textContent = `Aktuell geladen: ${nextPath}`;
+      }
+    } catch (error) {
+      console.error(error);
+      statusLine.textContent = error.message || "Fehler beim Laden der Moderationsvorschau";
+    }
+  }
+
+  refreshButton.addEventListener("click", async () => {
+    try {
+      isBusy = true;
+      setButtonsDisabled(true);
+      statusLine.textContent = "Aktualisiere Vorschau...";
+      await loadCurrentGif(true);
+    } finally {
+      isBusy = false;
+      setButtonsDisabled(false);
+    }
+  });
+
+  skipButton.addEventListener("click", async () => {
+    try {
+      isBusy = true;
+      setButtonsDisabled(true);
+      statusLine.textContent = "Aktuelles GIF wird geskipt...";
+
+      const response = await fetch(`${API_BASE_URL}/moderation/skip`, {
+        method: "POST"
+      });
+
+      const data = await parseResponseSafely(response);
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Skip fehlgeschlagen");
+      }
+
+      if (data.nextGif && data.nextGif.isFallback) {
+        statusLine.textContent = `Übersprungen: ${data.skippedFile} · Fallback aktiv`;
+      } else if (data.nextGif && data.nextGif.path) {
+        statusLine.textContent = `Übersprungen: ${data.skippedFile} · Nächstes GIF geladen`;
+      } else {
+        statusLine.textContent = `Übersprungen: ${data.skippedFile}`;
+      }
+
+      await loadCurrentGif(true);
+    } catch (error) {
+      console.error(error);
+      statusLine.textContent = error.message || "Fehler beim Skippen";
+    } finally {
+      isBusy = false;
+      setButtonsDisabled(false);
+    }
+  });
+
+  loadCurrentGif(true);
+  setInterval(() => {
+    loadCurrentGif(false);
+  }, 5000);
+</script>
+</body>
+</html>
