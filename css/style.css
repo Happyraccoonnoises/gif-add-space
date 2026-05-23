@@ -4,12 +4,14 @@
   --color-black: #000000;
   --color-light: #E3F1E6;
   --color-dark-green: #172524;
-  --color-pink: #f3E2DE;
-  --color-white: #FFFFFF;
+  --color-pink: #f3e2de;
+  --color-white: #ffffff;
 
   --border-radius: 18px;
   --content-width: 1100px;
   --transition: 180ms ease;
+  --shadow-panel: 0 12px 40px rgba(0, 0, 0, 0.28);
+  --shadow-button: 0 10px 24px rgba(243, 226, 222, 0.16);
 }
 
 * {
@@ -24,14 +26,14 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  padding-bottom: 6.5rem;
   font-family: Arial, sans-serif;
   line-height: 1.5;
+  color: var(--color-light);
   background:
     radial-gradient(circle at top, rgba(243, 226, 222, 0.08), transparent 35%),
     var(--color-black);
-  color: var(--color-light);
-  min-height: 100vh;
-  padding-bottom: 6.5rem;
 }
 
 img,
@@ -56,7 +58,6 @@ a {
 }
 
 .hero {
-  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,70 +66,90 @@ a {
 }
 
 .hero-inner {
+  position: relative;
   width: 100%;
   max-width: 850px;
 }
 
+.hero-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(320px, 62vw);
+  transform: translate(-50%, -58%);
+  opacity: 0.25;
+  filter: brightness(1.35);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eyebrow,
+.hero h1,
+.hero-text {
+  position: relative;
+  z-index: 1;
+}
+
 .eyebrow {
+  margin-bottom: 1rem;
+  color: var(--color-pink);
   font-family: 'Allerta Stencil', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-pink);
-  margin-bottom: 1rem;
 }
 
 .hero h1 {
+  margin-bottom: 1.25rem;
+  color: var(--color-light);
   font-family: 'Allerta Stencil', sans-serif;
   font-size: clamp(2.8rem, 8vw, 6rem);
   line-height: 1;
-  color: var(--color-light);
-  margin-bottom: 1.25rem;
 }
 
 .hero-text {
   max-width: 650px;
   margin: 0 auto 0.75rem;
-  font-size: 1.05rem;
   color: rgba(227, 241, 230, 0.9);
+  font-size: 1.05rem;
 }
 
 .page-content {
+  display: grid;
   width: min(100% - 2rem, var(--content-width));
   margin: 0 auto 4rem;
-  display: grid;
   gap: 1.5rem;
 }
 
 .donation,
 .latest-gif-section {
-  background: var(--color-dark-green);
+  padding: 1.5rem;
   border: 1px solid rgba(227, 241, 230, 0.14);
   border-radius: var(--border-radius);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
-  padding: 1.5rem;
+  background: var(--color-dark-green);
+  box-shadow: var(--shadow-panel);
 }
 
 .donation h2,
 .latest-gif-section h2 {
-  font-family: 'Allerta Stencil', sans-serif;
-  font-size: 1.5rem;
   margin-bottom: 0.75rem;
   color: var(--color-white);
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 1.5rem;
 }
 
 .donation > p,
 .latest-gif-section > p {
-  color: rgba(227, 241, 230, 0.85);
   margin-bottom: 1rem;
+  color: rgba(227, 241, 230, 0.85);
 }
 
 .upload-form {
   margin-top: 0.75rem;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.26);
   border: 1px solid rgba(227, 241, 230, 0.14);
   border-radius: 14px;
+  background: rgba(0, 0, 0, 0.26);
 }
 
 .upload-form.hidden {
@@ -153,28 +174,39 @@ a {
   color: var(--color-light);
 }
 
-.upload-form button[type="submit"] {
-  width: 100%;
+.upload-form button[type="submit"],
+.download-button,
+.social-links a {
   border: none;
   border-radius: 999px;
+  font-family: 'Allerta Stencil', sans-serif;
+  transition:
+    transform var(--transition),
+    opacity var(--transition),
+    box-shadow var(--transition);
+}
+
+.upload-form button[type="submit"],
+.download-button {
+  width: 100%;
   padding: 0.95rem 1rem;
   background: var(--color-pink);
   color: #172524;
-  font-family: 'Allerta Stencil', sans-serif;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 10px 24px rgba(243, 226, 222, 0.16);
+  box-shadow: var(--shadow-button);
 }
 
-.upload-form button[type="submit"]:hover {
+.upload-form button[type="submit"]:hover,
+.download-button:hover,
+.social-links a:hover {
   opacity: 0.92;
   transform: translateY(-1px);
 }
 
 #upload-status,
 #latest-gif-status {
-  font-size: 0.9rem;
   color: rgba(227, 241, 230, 0.72);
+  font-size: 0.9rem;
 }
 
 #upload-status {
@@ -182,62 +214,90 @@ a {
 }
 
 #latest-gif-image {
+  display: none;
   width: 100%;
   max-height: 520px;
-  object-fit: contain;
   margin-top: 1rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.04);
+  object-fit: contain;
+}
+
+.download-button {
   display: none;
+  margin-top: 1rem;
 }
 
 .social-bar {
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
   z-index: 1000;
+  width: 100%;
   padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(227, 241, 230, 0.14);
   background: rgba(23, 37, 36, 0.92);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(227, 241, 230, 0.14);
 }
 
 .social-bar-inner {
-  width: min(100%, 1100px);
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: min(100%, 1100px);
+  margin: 0 auto;
   gap: 1rem;
 }
 
+.social-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+
 .social-label {
+  color: var(--color-light);
   font-family: 'Allerta Stencil', sans-serif;
   font-size: 0.9rem;
-  color: var(--color-light);
+}
+
+.footer-logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+}
+
+.footer-logo-slot-right {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+}
+
+.social-logo,
+.wutkoeder-badge {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .social-links {
   display: flex;
+  justify-content: center;
   gap: 0.75rem;
+  flex: 1 1 auto;
   flex-wrap: wrap;
 }
 
 .social-links a {
   display: inline-block;
   padding: 0.65rem 1rem;
-  border-radius: 999px;
   background: var(--color-pink);
   color: #172524;
-  font-family: 'Allerta Stencil', sans-serif;
   font-size: 0.85rem;
-  transition: var(--transition);
-}
-
-.social-links a:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
 }
 
 @media (min-width: 900px) {
@@ -269,30 +329,31 @@ a {
 
   .social-bar-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .social-brand {
+    justify-content: center;
   }
 
   .social-links {
     width: 100%;
+    justify-content: center;
   }
-}
 
-.download-button {
-  width: 100%;
-  margin-top: 1rem;
-  border: none;
-  border-radius: 999px;
-  padding: 0.95rem 1rem;
-  background: var(--color-pink);
-  color: #172524;
-  font-family: 'Allerta Stencil', sans-serif;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 10px 24px rgba(243, 226, 222, 0.16);
-  display: none;
-}
+  .footer-logo-slot {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+  }
 
-.download-button:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+  .footer-logo-slot-right {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+  }
+
+  .social-label {
+    font-size: 0.8rem;
+  }
 }

@@ -15,6 +15,7 @@
       --color-white: #FFFFFF;
       --radius-xl: 28px;
       --radius-lg: 20px;
+      --transition: 180ms ease;
     }
 
     * {
@@ -23,7 +24,8 @@
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
     }
@@ -38,32 +40,36 @@
       overflow: hidden;
     }
 
-    .display-layout {
+    .display-shell {
       width: 100vw;
       height: 100vh;
-      display: grid;
-      grid-template-columns: 1.6fr 0.7fr;
-      gap: 24px;
       padding: 24px;
+      display: flex;
     }
 
-    .display-panel,
-    .qr-panel {
+    .display-panel {
+      width: 100%;
       background: rgba(23, 37, 36, 0.88);
       border: 1px solid rgba(227, 241, 230, 0.14);
       border-radius: var(--radius-xl);
       box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
-    }
-
-    .display-panel {
       padding: 24px;
       display: flex;
       flex-direction: column;
       min-width: 0;
+      min-height: 0;
+    }
+
+    .display-topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
     }
 
     .display-header {
-      margin-bottom: 18px;
+      max-width: 70ch;
     }
 
     .eyebrow {
@@ -86,7 +92,26 @@
     .display-subtitle {
       font-size: 1rem;
       color: rgba(227, 241, 230, 0.82);
-      max-width: 60ch;
+      max-width: 58ch;
+    }
+
+    .mode-button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 1.2rem;
+      background: var(--color-pink);
+      color: #172524;
+      font-family: 'Allerta Stencil', sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform var(--transition), opacity var(--transition), box-shadow var(--transition);
+      box-shadow: 0 10px 24px rgba(243, 226, 222, 0.16);
+      white-space: nowrap;
+    }
+
+    .mode-button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .gif-stage {
@@ -103,14 +128,21 @@
       overflow: hidden;
     }
 
-    #gifImage {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
+    .gif-image {
+      position: absolute;
+      inset: 24px;
+      width: calc(100% - 48px);
+      height: calc(100% - 48px);
       object-fit: contain;
-      display: none;
       border-radius: 18px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      transition: opacity 420ms ease;
+      pointer-events: none;
+    }
+
+    .gif-image.is-visible {
+      opacity: 1;
     }
 
     .placeholder {
@@ -123,129 +155,83 @@
     .status {
       margin-top: 14px;
       font-size: 0.9rem;
-      color: rgba(227, 241, 230, 0.65);
+      color: rgba(227, 241, 230, 0.6);
     }
 
-    .qr-panel {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 20px;
+    .gif-stage:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: #000000;
     }
 
-    .qr-top h2 {
-      font-family: 'Allerta Stencil', sans-serif;
-      font-size: 1.7rem;
-      color: var(--color-white);
-      margin-bottom: 0.8rem;
-      line-height: 1.1;
-    }
-
-    .qr-top p {
-      color: rgba(227, 241, 230, 0.82);
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .qr-box {
-      background: var(--color-pink);
-      border-radius: 24px;
-      padding: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .qr-box img {
+    .gif-stage:fullscreen .gif-image {
+      inset: 0;
       width: 100%;
-      max-width: 260px;
-      aspect-ratio: 1 / 1;
-      background: white;
-      border-radius: 16px;
-      padding: 12px;
+      height: 100%;
+      border-radius: 0;
+      box-shadow: none;
     }
 
-    .upload-url {
-      display: inline-block;
-      padding: 0.8rem 1rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--color-light);
-      font-size: 0.92rem;
-      word-break: break-word;
+    .gif-stage:fullscreen .placeholder {
+      font-size: 2rem;
     }
 
-    @media (max-width: 1100px) {
-      .display-layout {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr auto;
-      }
-
-      .qr-panel {
-        flex-direction: row;
-        align-items: center;
-      }
-
-      .qr-top {
-        flex: 1;
-      }
-
-      .qr-box img {
-        max-width: 180px;
+    @media (max-width: 900px) {
+      .display-topbar {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-<div class="display-layout">
+<div class="display-shell">
   <section class="display-panel">
-    <div class="display-header">
-      <p class="eyebrow">Frequenz Kollektiv presents</p>
-      <h1 class="display-title">GIF Add Space</h1>
-      <p class="display-subtitle">
-        Lade ein GIF hoch und sieh zu, wie es direkt auf dem Screen erscheint.
-      </p>
+    <div class="display-topbar">
+      <div class="display-header">
+        <p class="eyebrow">Frequenz Kollektiv presents</p>
+        <h1 class="display-title">GIF Add Space</h1>
+        <p class="display-subtitle">
+          Live-Ansicht der zuletzt hochgeladenen GIFs.
+        </p>
+      </div>
+
+      <button id="fullscreen-toggle" class="mode-button" type="button">
+        Vollbildmodus
+      </button>
     </div>
 
-    <div class="gif-stage">
-      <img id="gifImage" src="" alt="Aktuelles GIF" />
+    <div id="gif-stage" class="gif-stage">
+      <img id="gifImageA" class="gif-image is-visible" src="" alt="Aktuelles GIF" />
+      <img id="gifImageB" class="gif-image" src="" alt="Aktuelles GIF" />
       <div id="placeholder" class="placeholder">Warte auf das nächste GIF ...</div>
     </div>
 
     <div id="status" class="status">Verbinde...</div>
   </section>
-
-  <aside class="qr-panel">
-    <div class="qr-top">
-      <h2>Upload dein GIF</h2>
-      <p>
-        Scanne den QR-Code und lade dein GIF direkt vom Handy hoch.
-      </p>
-    </div>
-
-    <div class="qr-box">
-      <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://happyraccoonnoises.github.io/gif-add-space/"
-        alt="QR-Code zur Upload-Seite"
-      />
-    </div>
-
-    <div class="upload-url">
-      happyraccoonnoises.github.io/gif-add-space/
-    </div>
-  </aside>
 </div>
 
 <script>
   const API_BASE_URL = "https://gif-space-backend.onrender.com";
-  const gifImage = document.getElementById("gifImage");
+  const gifImageA = document.getElementById("gifImageA");
+  const gifImageB = document.getElementById("gifImageB");
   const placeholder = document.getElementById("placeholder");
   const status = document.getElementById("status");
+  const gifStage = document.getElementById("gif-stage");
+  const fullscreenToggle = document.getElementById("fullscreen-toggle");
 
+  let activeImage = gifImageA;
+  let inactiveImage = gifImageB;
   let currentGifPath = null;
+  let isLoading = false;
 
-  async function loadLatestGif() {
+  async function loadLatestGif(forceRefresh = false) {
+    if (isLoading) return;
+    isLoading = true;
+
     try {
       const response = await fetch(`${API_BASE_URL}/uploads/latest`, {
         cache: "no-store"
@@ -254,7 +240,8 @@
       if (!response.ok) {
         if (response.status === 404) {
           status.textContent = "Noch kein GIF vorhanden";
-          gifImage.style.display = "none";
+          gifImageA.classList.remove("is-visible");
+          gifImageB.classList.remove("is-visible");
           placeholder.style.display = "block";
           return;
         }
@@ -269,35 +256,69 @@
       }
 
       const newGifPath = data.latestGif.path;
+      const hasNewGif = newGifPath !== currentGifPath;
 
-      if (newGifPath !== currentGifPath) {
+      if (hasNewGif || forceRefresh) {
         currentGifPath = newGifPath;
-        gifImage.src = `${API_BASE_URL}${newGifPath}?t=${Date.now()}`;
-        gifImage.style.display = "block";
-        placeholder.style.display = "none";
-        status.textContent = "Neues GIF geladen";
+
+        const nextUrl = `${API_BASE_URL}${newGifPath}?t=${Date.now()}`;
+
+        inactiveImage.onload = () => {
+          inactiveImage.classList.add("is-visible");
+          activeImage.classList.remove("is-visible");
+          placeholder.style.display = "none";
+          status.textContent = "GIF aktuell geladen";
+
+          const previousActive = activeImage;
+          activeImage = inactiveImage;
+          inactiveImage = previousActive;
+          inactiveImage.onload = null;
+        };
+
+        inactiveImage.src = nextUrl;
       } else {
         status.textContent = "Warte auf neues GIF";
       }
     } catch (error) {
       console.error(error);
       status.textContent = "Verbindung unterbrochen - neuer Versuch läuft";
+    } finally {
+      isLoading = false;
     }
   }
 
-  async function keepAlivePing() {
+  async function toggleFullscreen() {
     try {
-      await fetch(`${API_BASE_URL}/uploads/latest`, {
-        cache: "no-store"
-      });
+      if (!document.fullscreenElement) {
+        await gifStage.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
     } catch (error) {
-      console.error("Ping fehlgeschlagen:", error);
+      console.error("Fullscreen-Fehler:", error);
     }
   }
 
-  loadLatestGif();
-  setInterval(loadLatestGif, 5000);
-  setInterval(keepAlivePing, 14 * 60 * 1000);
+  fullscreenToggle.addEventListener("click", toggleFullscreen);
+
+  document.addEventListener("fullscreenchange", () => {
+    fullscreenToggle.textContent = document.fullscreenElement
+      ? "Vollbild verlassen"
+      : "Vollbildmodus";
+  });
+
+  document.addEventListener("visibilitychange", async () => {
+    if (!document.hidden) {
+      await loadLatestGif(true);
+    }
+  });
+
+  window.addEventListener("focus", async () => {
+    await loadLatestGif(true);
+  });
+
+  loadLatestGif(true);
+  setInterval(() => loadLatestGif(), 5000);
 </script>
 </body>
 </html>
