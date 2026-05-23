@@ -60,7 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         if (latestGifStatus) {
-          latestGifStatus.textContent = "Anzeige-Status: noch kein GIF vorhanden";
+          if (data.latestGif.isFallback) {
+            latestGifStatus.textContent = "Anzeige-Status: Fallback-GIF aktiv";
+          } else {
+            latestGifStatus.textContent = "Anzeige-Status: GIF aktuell geladen";
+          }
         }
 
         if (latestGifImage) {
@@ -153,5 +157,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadLatestGif();
-  setInterval(loadLatestGif, 30000);
+  setInterval(loadLatestGif, 5000);
 });
