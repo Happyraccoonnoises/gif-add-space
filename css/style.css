@@ -357,3 +357,41 @@ a {
     font-size: 0.8rem;
   }
 }
+
+.signal-teaser {
+  width: min(100% - 2rem, var(--content-width));
+  margin: -2.5rem auto 5.5rem;
+}
+
+.signal-entry {
+  display: inline-block;
+  padding: 0.7rem 0.95rem;
+  border: 1px dashed rgba(243, 226, 222, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--color-light);
+  opacity: 0.72;
+  cursor: pointer;
+  transition: transform var(--transition), opacity var(--transition), border-color var(--transition);
+}
+
+.signal-entry:hover {
+  transform: translateY(-1px);
+  opacity: 1;
+  border-color: rgba(243, 226, 222, 0.85);
+}
+
+.signal-entry-label {
+  color: var(--color-pink);
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.signal-entry-code {
+  margin-left: 0.5rem;
+  color: rgba(227, 241, 230, 0.55);
+  font-family: monospace;
+  font-size: 0.72rem;
+}

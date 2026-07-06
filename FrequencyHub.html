@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Frequency Hub</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      background:#050505;
+
+      color:#d7ffe3;
+
+      font-family:Consolas, monospace;
+
+      height:100vh;
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      overflow:hidden;
+
+    }
+
+    body::before{
+
+      content:"";
+
+      position:fixed;
+
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,.025) 0px,
+          rgba(255,255,255,.025) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+
+      opacity:.3;
+
+    }
+
+    #terminal{
+
+      width:min(900px,90vw);
+
+    }
+
+    .line{
+
+      white-space:pre-wrap;
+
+      margin:.35rem 0;
+
+      opacity:0;
+
+    }
+
+    .cursor{
+
+      display:inline-block;
+
+      width:.55em;
+
+      background:#d7ffe3;
+
+      animation:blink .8s infinite;
+
+    }
+
+    @keyframes blink{
+
+      50%{
+
+        opacity:0;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="terminal">
+
+</div>
+
+<script>
+
+  const terminal=document.getElementById("terminal");
+
+  const script=[
+
+    "> connection established",
+
+    "> frequency scan...",
+
+    "> signal quality: 97%",
+
+    ">",
+
+    "> Unknown node detected.",
+
+    ">",
+
+    "> Welcome.",
+
+    ">",
+
+    "> We did not expect anyone to find this.",
+
+    ">",
+
+    "> If you are reading this...",
+
+    ">",
+
+    "> ...you are already listening.",
+
+    ">",
+
+    ">"
+
+  ];
+
+  let lineIndex=0;
+
+  function typeLine(){
+
+    if(lineIndex>=script.length){
+
+      const cursor=document.createElement("span");
+
+      cursor.className="cursor";
+
+      terminal.appendChild(cursor);
+
+      return;
+
+    }
+
+    const div=document.createElement("div");
+
+    div.className="line";
+
+    terminal.appendChild(div);
+
+    div.style.opacity=1;
+
+    const text=script[lineIndex];
+
+    let char=0;
+
+    const interval=setInterval(()=>{
+
+      div.textContent=text.substring(0,char);
+
+      char++;
+
+      if(char>text.length){
+
+        clearInterval(interval);
+
+        lineIndex++;
+
+        setTimeout(typeLine,250);
+
+      }
+
+    },28);
+
+  }
+
+  setTimeout(typeLine,500);
+
+</script>
+
+</body>
+
+</html>
