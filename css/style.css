@@ -1514,3 +1514,73 @@ a {
   }
 
 }
+/* Event-Karten im FrequenZ-Look.
+   Entweder in css/style.css einfügen, oder als eigene Datei per
+   <link rel="stylesheet" href="css/calendar.css"> in die index.html einbinden. */
+
+#event-list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.cal-card {
+  display: flex;
+  flex-direction: column;
+  background: #0c0c0e;
+  border: 1px solid #232326;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  transition: border-color 0.12s ease;
+}
+
+  .cal-card:hover {
+    border-color: #ff2e6e;
+  }
+/* Akzentfarbe – eure Logo-Farbe hier eintragen */
+
+.cal-card-img {
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+}
+
+.cal-card-body {
+  padding: 16px;
+}
+
+.cal-card-date {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8f8f96;
+}
+
+.cal-card-title {
+  font-family: "Allerta Stencil", sans-serif; /* fällt auf eure Schrift zurück, falls nicht geladen */
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 8px 0;
+  font-size: 20px;
+  line-height: 1.05;
+}
+
+.cal-card-desc {
+  color: #8f8f96;
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.cal-card-cta {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cal-empty {
+  color: #8f8f96;
+}
