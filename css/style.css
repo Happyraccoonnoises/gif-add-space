@@ -229,27 +229,30 @@ a {
 }
 
 .social-bar {
-  position: fixed;
+  #position: fixed;
   left: 0;
   bottom: 0;
   z-index: 1000;
   width: 100%;
   padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(227, 241, 230, 0.14);
-  background: rgba(23, 37, 36, 0.92);
-  backdrop-filter: blur(10px);
+  background: rgba(23, 15, 56, 0.12); /* social bar color lila keine ahnung besser zum schwarz lezte zahl transparents */ 
+  backdrop-filter: blur(10px);   
 }
 
 .social-bar-inner {
+  position: relative; /*Bezugs punkt Keine ahnung der scheiß war nicht mittig */
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: min(100%, 1100px);
-  margin: 0 auto;
+  justify-content: center; /*Damit wirklich mittig ist RAWWWWWWW */
+  width: min(100%);
+  margin: 0;
   gap: 1rem;
 }
-
+/*ich hab kein bock mher jz ist hoffentlich ist jz mittg mein auge sagt nein ich schaus mir jz nicht mehr an*/
 .social-brand {
+  position: absolute;
+  left:0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -292,13 +295,15 @@ a {
   flex-wrap: wrap;
 }
 
-.social-links a {
-  display: inline-block;
-  padding: 0.65rem 1rem;
-  background: var(--color-pink);
-  color: #172524;
-  font-size: 0.85rem;
-}
+  .social-links a {
+    display: inline-block;
+    padding: 0.65rem 1rem;
+    background: var(--color-pink);
+    color: #172524;
+    font-size: 0.85rem;
+  }
+
+könne iwr das so an passten das es mher transparennt ist und weil unten ist vllt diese tanrparente nicht ist bzw die icoans am rand sind und nicht ganz so mitteg und ie frabe jz nicht ganz vorhanden bzw eginte nur die eicon hone hinter grund
 
 @media (min-width: 900px) {
   .page-content {
@@ -326,10 +331,10 @@ a {
   body {
     padding-bottom: 8.5rem;
   }
-
+  /* social bar jz fixiert */
   .social-bar-inner {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .social-brand {
@@ -337,8 +342,11 @@ a {
   }
 
   .social-links {
-    width: 100%;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end; /* Buttons an den rechten Rand */
+    gap: 0.75rem;
+    flex: 0 0 auto; /* war 1 1 auto — das zog sie mittig; jetzt bleiben sie rechts */
+    flex-wrap: wrap;
   }
 
   .footer-logo-slot {
@@ -348,7 +356,7 @@ a {
   }
 
   .footer-logo-slot-right {
-    width: 50px;
+    width: 5px;
     height: 50px;
     flex: 0 0 50px;
   }
