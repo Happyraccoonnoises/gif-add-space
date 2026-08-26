@@ -1,0 +1,314 @@
+/* =========================================================
+   IMPRESSUM UND GEHEIME SEITE
+   Separat gehalten, damit die neuen Seiten leicht bearbeitbar bleiben.
+   ========================================================= */
+
+/* -------------------------
+   IMPRESSUM
+   ------------------------- */
+
+.info-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(20, 184, 166, 0.12), transparent 28%),
+    #000;
+}
+
+.placeholder-page {
+  width: min(calc(100% - 2rem), 1100px);
+  margin: 0 auto;
+  padding: clamp(5rem, 10vw, 9rem) 0 8rem;
+}
+
+.placeholder-hero {
+  position: relative;
+  max-width: 850px;
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+  padding-left: clamp(1rem, 3vw, 2rem);
+  border-left: 1px solid rgba(243, 226, 222, 0.45);
+}
+
+.placeholder-hero h1 {
+  margin: 0 0 1.5rem;
+  color: var(--color-light, #e3f1e6);
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: clamp(3.8rem, 11vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.placeholder-intro {
+  max-width: 650px;
+  color: rgba(227, 241, 230, 0.68);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.65;
+}
+
+.placeholder-panel {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
+}
+
+.placeholder-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.placeholder-panel-heading h2 {
+  margin: 0;
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+}
+
+.imprint-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.imprint-fields > div {
+  min-height: 150px;
+  padding: 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background 180ms ease;
+}
+
+.imprint-fields > div:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.imprint-fields > div:nth-child(2n) {
+  border-right: 0;
+}
+
+.imprint-fields > div:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.imprint-fields dt {
+  margin-bottom: 2rem;
+  color: var(--color-pink, #f3e2de);
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.imprint-fields dd {
+  margin: 0;
+  color: rgba(227, 241, 230, 0.58);
+  line-height: 1.55;
+}
+
+/* -------------------------
+   GEHEIME SEITE
+   ------------------------- */
+
+.secret-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(20, 184, 166, 0.17), transparent 30%),
+    radial-gradient(circle at 15% 85%, rgba(243, 226, 222, 0.09), transparent 28%),
+    #000;
+}
+
+.secret-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.025) 0 1px,
+      transparent 2px 5px
+    );
+  opacity: 0.35;
+}
+
+.secret-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(calc(100% - 2rem), 1000px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem 0 clamp(4rem, 10vw, 8rem);
+}
+
+.secret-brand {
+  display: block;
+  width: 96px;
+  margin-bottom: auto;
+}
+
+.secret-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.secret-gate,
+.secret-reveal {
+  padding-top: clamp(5rem, 12vw, 10rem);
+}
+
+.secret-gate[hidden],
+.secret-reveal[hidden] {
+  display: none;
+}
+
+.secret-status {
+  margin: 0 0 1rem;
+  color: var(--color-pink, #f3e2de);
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+}
+
+.secret-gate h1,
+.secret-reveal h1 {
+  max-width: 900px;
+  margin: 0;
+  color: var(--color-light, #e3f1e6);
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.secret-copy {
+  max-width: 520px;
+  margin-top: 2rem;
+  color: rgba(227, 241, 230, 0.66);
+  line-height: 1.6;
+}
+
+.secret-form {
+  max-width: 700px;
+  margin-top: 3rem;
+}
+
+.secret-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.secret-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.secret-input-row input,
+.secret-input-row button {
+  min-height: 62px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 0;
+  font: inherit;
+}
+
+.secret-input-row input {
+  min-width: 0;
+  padding: 0 1.2rem;
+  border-right: 0;
+  outline: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-light, #e3f1e6);
+  font-family: monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+.secret-input-row input:focus {
+  border-color: var(--color-pink, #f3e2de);
+  box-shadow: inset 0 0 0 1px var(--color-pink, #f3e2de);
+}
+
+.secret-input-row input[aria-invalid="true"] {
+  border-color: #ff6174;
+}
+
+.secret-input-row button {
+  padding: 0 1.5rem;
+  background: var(--color-pink, #f3e2de);
+  color: var(--color-dark-green, #172524);
+  font-family: 'Allerta Stencil', sans-serif;
+  cursor: pointer;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.secret-input-row button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.secret-feedback {
+  min-height: 1.5rem;
+  margin-top: 0.8rem;
+  color: #ff8c9a;
+  font-size: 0.9rem;
+}
+
+.secret-invitation-placeholder {
+  max-width: 760px;
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    linear-gradient(135deg, rgba(20, 184, 166, 0.13), rgba(255, 255, 255, 0.02));
+}
+
+.secret-invitation-placeholder span {
+  color: var(--color-pink, #f3e2de);
+  font-family: monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.secret-invitation-placeholder p {
+  max-width: 560px;
+  margin: 3rem 0 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .imprint-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .imprint-fields > div,
+  .imprint-fields > div:nth-child(2n),
+  .imprint-fields > div:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .imprint-fields > div:last-child {
+    border-bottom: 0;
+  }
+
+  .secret-input-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .secret-input-row input {
+    border-right: 1px solid rgba(255, 255, 255, 0.24);
+  }
+}
