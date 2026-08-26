@@ -3,23 +3,38 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const htmlPages = [
+  'index.html',
+  'merch.html',
+  'impressum.html',
+  'geheim.html',
+  'gif.html',
+  'FrequencyHub.html',
+  'Display.html',
+  'modwwdw.html',
+  '404.html',
+];
+
 module.exports = merge(common, {
   mode: 'production',
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-    }),
+    ...htmlPages.map((page) => new HtmlWebpackPlugin({
+      template: `./${page}`,
+      filename: page,
+      inject: false,
+    })),
     new CopyPlugin({
       patterns: [
-        { from: 'img', to: 'img' },
+        { from: 'assets', to: 'assets' },
         { from: 'css', to: 'css' },
-        { from: 'js/vendor', to: 'js/vendor' },
+        { from: 'js/landing.js', to: 'js/landing.js' },
+        { from: 'js/weticketapi fetch.js', to: 'js/weticketapi fetch.js' },
         { from: 'icon.svg', to: 'icon.svg' },
         { from: 'favicon.ico', to: 'favicon.ico' },
         { from: 'robots.txt', to: 'robots.txt' },
         { from: 'icon.png', to: 'icon.png' },
-        { from: '404.html', to: '404.html' },
         { from: 'site.webmanifest', to: 'site.webmanifest' },
+        { from: '.htaccess', to: '.htaccess', toType: 'file' },
       ],
     }),
   ],

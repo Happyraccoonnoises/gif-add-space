@@ -29,11 +29,11 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="landing-header">
-    <div class="landing-header-inner">
+<!-- HEADER -->
+<header class="landing-header">
+  <div class="landing-header-inner">
 
-      <a href="gif.html" class="landing-brand">
+      <a href="/gif" class="landing-brand">
         <img src="assets/1_FZ_Logo_Standart_Color.svg"
              alt="FrequenZ Kollektiv"
              class="landing-header-logo">
@@ -42,335 +42,367 @@
       <nav class="landing-nav">
         <a href="#events">Events</a>
         <a href="#calendar">Kalender</a>
-        <a href="merch.html">Merch</a>
-        <a href="about.html">Über uns</a>
+        <a href="/merch">Merch</a>
+        <a href="/about">Über uns</a>
 
-        <button class="landing-menu-button"
-                type="button"
-                aria-label="Menü öffnen">
-          ☰
-        </button>
-      </nav>
+      <button
+        class="landing-menu-button"
+        type="button"
+        aria-label="Menü öffnen"
+      >
+        ☰
+      </button>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+  <!-- ============================= -->
+  <!-- EVENT KARUSSELL -->
+  <!-- ============================= -->
+
+  <section class="event-carousel" id="events">
+
+    <div class="carousel-track">
+
+      <!-- EVENT 1 -->
+      <a href="#" class="event-slide event-slide-1">
+
+        <div class="event-slide-content">
+
+          <p class="event-slide-number">
+            01 / EVENT
+          </p>
+
+          <h1>
+            FREQUENZ
+            <br>
+            EVENT ONE
+          </h1>
+
+          <p class="event-slide-description">
+            Hier kommt später eine kurze Beschreibung des Events hin.
+          </p>
+
+          <span class="event-open-link">
+              Event ansehen →
+            </span>
+
+        </div>
+
+      </a>
+
+
+      <!-- EVENT 2 -->
+      <a href="#" class="event-slide event-slide-2">
+
+        <div class="event-slide-content">
+
+          <p class="event-slide-number">
+            02 / EVENT
+          </p>
+
+          <h1>
+            NEXT
+            <br>
+            FREQUENCY
+          </h1>
+
+          <p class="event-slide-description">
+            Zweites Event als Platzhalter.
+          </p>
+
+          <span class="event-open-link">
+              Event ansehen →
+            </span>
+
+        </div>
+
+      </a>
+
+
+      <!-- EVENT 3 -->
+      <a href="#" class="event-slide event-slide-3">
+
+        <div class="event-slide-content">
+
+          <p class="event-slide-number">
+            03 / EVENT
+          </p>
+
+          <h1>
+            WER LIEST
+            <br>
+            DAS ÜBERHAUPT
+          </h1>
+
+          <p class="event-slide-description">
+            Drittes Event als Platzhalter.
+          </p>
+
+          <span class="event-open-link">
+              Event ansehen →
+            </span>
+
+        </div>
+
+      </a>
 
     </div>
-  </header>
 
 
-  <main>
+    <!-- Pfeile -->
 
-    <!-- ============================= -->
-    <!-- EVENT KARUSSELL -->
-    <!-- ============================= -->
+    <button
+      class="carousel-button carousel-button-left"
+      type="button"
+      aria-label="Vorheriges Event"
+    >
+      ←
+    </button>
 
-    <section class="event-carousel" id="events">
-
-      <div class="carousel-track">
-
-        <!-- EVENT 1 -->
-        <a href="#" class="event-slide event-slide-1">
-
-          <div class="event-slide-content">
-
-            <p class="event-slide-number">
-              01 / EVENT
-            </p>
-
-            <h1>
-              FREQUENZ
-              <br>
-              EVENT ONE
-            </h1>
-
-            <p class="event-slide-description">
-              Hier kommt später eine kurze Beschreibung des Events hin.
-            </p>
-
-            <span class="event-open-link">
-              Event ansehen →
-            </span>
-
-          </div>
-
-        </a>
+    <button
+      class="carousel-button carousel-button-right"
+      type="button"
+      aria-label="Nächstes Event"
+    >
+      →
+    </button>
 
 
-        <!-- EVENT 2 -->
-        <a href="#" class="event-slide event-slide-2">
+    <!-- Anzeige unten -->
 
-          <div class="event-slide-content">
+    <div class="carousel-indicators">
 
-            <p class="event-slide-number">
-              02 / EVENT
-            </p>
+      <button
+        class="carousel-dot active"
+        type="button"
+        data-slide="0"
+        aria-label="Event 1"
+      ></button>
 
-            <h1>
-              NEXT
-              <br>
-              FREQUENCY
-            </h1>
+      <button
+        class="carousel-dot"
+        type="button"
+        data-slide="1"
+        aria-label="Event 2"
+      ></button>
 
-            <p class="event-slide-description">
-              Zweites Event als Platzhalter.
-            </p>
+      <button
+        class="carousel-dot"
+        type="button"
+        data-slide="2"
+        aria-label="Event 3"
+      ></button>
 
-            <span class="event-open-link">
-              Event ansehen →
-            </span>
+    </div>
 
-          </div>
-
-        </a>
-
-
-        <!-- EVENT 3 -->
-        <a href="#" class="event-slide event-slide-3">
-
-          <div class="event-slide-content">
-
-            <p class="event-slide-number">
-              03 / EVENT
-            </p>
-
-            <h1>
-              WER LIEST
-              <br>
-              DAS ÜBERHAUPT
-            </h1>
-
-            <p class="event-slide-description">
-              Drittes Event als Platzhalter.
-            </p>
-
-            <span class="event-open-link">
-              Event ansehen →
-            </span>
-
-          </div>
-
-        </a>
-
-      </div>
+  </section>
 
 
-      <!-- Pfeile -->
+  <!-- ============================= -->
+  <!-- KALENDER -->
+  <!-- ============================= -->
 
-      <button class="carousel-button carousel-button-left"
-              type="button"
-              aria-label="Vorheriges Event">
-        ←
-      </button>
+  <section class="landing-section" id="calendar">
 
-      <button class="carousel-button carousel-button-right"
-              type="button"
-              aria-label="Nächstes Event">
-        →
-      </button>
-
-
-      <!-- Anzeige unten -->
-
-      <div class="carousel-indicators">
-
-        <button class="carousel-dot active"
-                type="button"
-                data-slide="0"
-                aria-label="Event 1"></button>
-
-        <button class="carousel-dot"
-                type="button"
-                data-slide="1"
-                aria-label="Event 2"></button>
-
-        <button class="carousel-dot"
-                type="button"
-                data-slide="2"
-                aria-label="Event 3"></button>
-
-      </div>
-
-    </section>
-
-
-    <!-- ============================= -->
-    <!-- KALENDER -->
-    <!-- ============================= -->
-
-    <section class="landing-section" id="calendar">
-
-      <div class="landing-section-heading">
+    <div class="landing-section-heading">
 
         <span class="section-number">
           01
         </span>
 
-        <div>
-          <p class="section-eyebrow">
-            What's next?
-          </p>
+      <div>
+        <p class="section-eyebrow">
+          What's next?
+        </p>
 
-          <h2>
-            Kalender
-          </h2>
-        </div>
-
+        <h2>
+          Kalender
+        </h2>
       </div>
 
+    </div>
 
-      <!-- erstmal Platzhalter -->
 
-      <div class="calendar-placeholder">
+    <!-- erstmal Platzhalter -->
 
-        <div class="calendar-placeholder-content" id="event-list">
-          <p>EVENT CALENDAR</p>
-          <span>Unsere kommenden Events erscheinen hier.</span>
-        </div>
+    <div class="calendar-placeholder">
 
+      <div class="calendar-placeholder-header">
+        <span>JUL</span>
+        <span>2026</span>
       </div>
 
-    </section>
+      <div class="calendar-placeholder-content">
 
+        <p>
+          EVENT CALENDAR
+        </p>
 
-    <!-- ============================= -->
-    <!-- WEITERE SEITEN -->
-    <!-- ============================= -->
-
-    <section class="landing-section">
-
-      <div class="landing-section-heading">
-
-        <span class="section-number">
-          02
-        </span>
-
-        <div>
-          <p class="section-eyebrow">
-            Explore
-          </p>
-
-          <h2>
-            FrequenZ
-          </h2>
-        </div>
-
-      </div>
-
-
-      <div class="landing-link-grid">
-
-        <a href="merch.html" class="landing-link-card">
-
-          <span class="landing-card-number">
-            01
+        <span>
+            Unsere kommenden Events erscheinen hier.
           </span>
-
-          <div class="landing-card-bottom">
-
-            <h3>
-              Merch
-            </h3>
-
-            <span>
-              Schaufenster öffnen →
-            </span>
-
-          </div>
-
-        </a>
-
-
-        <a href="about.html" class="landing-link-card">
-
-          <span class="landing-card-number">
-            02
-          </span>
-
-          <div class="landing-card-bottom">
-
-            <h3>
-              Über uns
-            </h3>
-
-            <span>
-              Wer wir sind →
-            </span>
-
-          </div>
-
-        </a>
-
-
-        <a href="impressum.html" class="landing-link-card">
-
-          <span class="landing-card-number">
-            03
-          </span>
-
-          <div class="landing-card-bottom">
-
-            <h3>
-              Impressum
-            </h3>
-
-            <span>
-              Öffnen →
-            </span>
-
-          </div>
-
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- ============================= -->
-  <!-- FOOTER -->
-  <!-- ============================= -->
-
-  <footer class="social-bar">
-
-    <div class="social-bar-inner">
-
-      <div class="social-brand">
-
-        <div class="footer-logo-slot">
-
-          <img src="assets/1_FZ_Logo_Standart_Color.svg"
-               alt="FrequenZ Kollektiv Logo"
-               class="social-logo">
-
-        </div>
-
-        <span class="social-label">
-          FrequenZ Kollektiv
-        </span>
-
-      </div>
-
-
-      <div class="social-links">
-
-        <a href="https://www.instagram.com/frequenz.kollektiv/"
-           target="_blank"
-           rel="noopener noreferrer">
-          Instagram
-        </a>
-
-       
 
       </div>
 
     </div>
 
-  </footer>
+  </section>
 
 
-  <script src="js/landing.js"></script>
-  <script src="js/weticketapi%20fetch.js"></script>
+  <!-- ============================= -->
+  <!-- WEITERE SEITEN -->
+  <!-- ============================= -->
+
+  <section class="landing-section">
+
+    <div class="landing-section-heading">
+
+        <span class="section-number">
+          02
+        </span>
+
+      <div>
+        <p class="section-eyebrow">
+          Explore
+        </p>
+
+        <h2>
+          FrequenZ
+        </h2>
+      </div>
+
+    </div>
+
+
+    <div class="landing-link-grid">
+
+        <a href="/merch" class="landing-link-card">
+
+          <span class="landing-card-number">
+            01
+          </span>
+
+        <div class="landing-card-bottom">
+
+          <h3>
+            Merch
+          </h3>
+
+          <span>
+              Schaufenster öffnen →
+            </span>
+
+        </div>
+
+      </a>
+
+
+        <a href="/about" class="landing-link-card">
+
+          <span class="landing-card-number">
+            02
+          </span>
+
+        <div class="landing-card-bottom">
+
+          <h3>
+            Über uns
+          </h3>
+
+          <span>
+              Wer wir sind →
+            </span>
+
+        </div>
+
+      </a>
+
+
+        <a href="/impressum" class="landing-link-card">
+
+          <span class="landing-card-number">
+            03
+          </span>
+
+        <div class="landing-card-bottom">
+
+          <h3>
+            Impressum
+          </h3>
+
+          <span>
+              Öffnen →
+            </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+
+<footer class="social-bar">
+
+  <div class="social-bar-inner">
+
+    <div class="social-brand">
+
+      <div class="footer-logo-slot">
+
+        <img
+          src="assets/1_FZ_Logo_Standart_Color.svg"
+          alt="FrequenZ Kollektiv Logo"
+          class="social-logo"
+        >
+
+      </div>
+
+      <span class="social-label">
+          FrequenZ Kollektiv
+        </span>
+
+    </div>
+
+
+    <div class="social-links">
+
+      <a
+        href="https://www.instagram.com/frequenz.kollektiv/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram
+      </a>
+
+      <a
+        href="https://linktr.ee/frequenz.kollektiv"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Linktree
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="js/landing.js"></script>
 
 </body>
 </html>
->

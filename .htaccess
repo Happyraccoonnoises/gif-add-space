@@ -1,0 +1,19 @@
+DirectoryIndex index.html
+
+Options -MultiViews
+
+RewriteEngine On
+
+# Alte URLs mit .html dauerhaft auf die kurze Schreibweise umleiten.
+RewriteCond %{THE_REQUEST} \s/+index\.html(?:[?\s]) [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[?\s]) [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L,NE]
+
+# Kurze URLs intern auf die vorhandenen HTML-Dateien abbilden.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+ErrorDocument 404 /404.html

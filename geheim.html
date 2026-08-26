@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signal – FrequenZ Kollektiv</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Ein verborgenes Signal des FrequenZ Kollektivs.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body class="secret-page">
+  <main class="secret-shell">
+    <a class="secret-brand" href="/" aria-label="Zurück zur Startseite">
+      <img src="assets/1_FZ_Logo_Standart_Color.svg" alt="FrequenZ Kollektiv">
+    </a>
+
+    <section id="secret-gate" class="secret-gate" aria-labelledby="secret-title">
+      <p class="secret-status">SIGNAL / GESCHÜTZT</p>
+      <h1 id="secret-title">Kennst du<br>die Frequenz?</h1>
+      <p class="secret-copy">
+        Gib den Code ein, um das Signal zu entschlüsseln.
+      </p>
+
+      <form id="secret-form" class="secret-form" novalidate>
+        <label for="secret-code">Zugangscode</label>
+        <div class="secret-input-row">
+          <input id="secret-code"
+                 name="code"
+                 type="text"
+                 inputmode="text"
+                 autocomplete="off"
+                 autocapitalize="none"
+                 spellcheck="false"
+                 aria-describedby="secret-feedback"
+                 required>
+          <button type="submit">Prüfen →</button>
+        </div>
+        <p id="secret-feedback" class="secret-feedback" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="secret-reveal" class="secret-reveal" aria-labelledby="reveal-title" hidden>
+      <p class="secret-status">SIGNAL / ENTSCHLÜSSELT</p>
+      <h1 id="reveal-title" tabindex="-1">Du bist<br>drin.</h1>
+      <div class="secret-invitation-placeholder">
+        <span>PLACEHOLDER / INVITATION</span>
+        <p>
+          Rauschen wird zu Rhythmus. Die nächsten Koordinaten erscheinen hier,
+          sobald das Signal vollständig ist.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("secret-form");
+      const input = document.getElementById("secret-code");
+      const feedback = document.getElementById("secret-feedback");
+      const gate = document.getElementById("secret-gate");
+      const reveal = document.getElementById("secret-reveal");
+      const revealTitle = document.getElementById("reveal-title");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (input.value.trim() === "Fhrz2") {
+          gate.hidden = true;
+          reveal.hidden = false;
+          revealTitle.focus();
+          return;
+        }
+
+        input.setAttribute("aria-invalid", "true");
+        feedback.textContent = "Code nicht erkannt. Versuch es noch einmal.";
+        input.select();
+      });
+
+      input.addEventListener("input", () => {
+        input.removeAttribute("aria-invalid");
+        feedback.textContent = "";
+      });
+    });
+  </script>
+</body>
+</html>
