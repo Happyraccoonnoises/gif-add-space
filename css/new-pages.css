@@ -111,13 +111,179 @@
 /* -------------------------
    GEHEIME SEITE
    ------------------------- */
+body.secret-page {
+  background: #000;
+}
 
-.secret-page {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at 78% 20%, rgba(20, 184, 166, 0.17), transparent 30%),
-    radial-gradient(circle at 15% 85%, rgba(243, 226, 222, 0.09), transparent 28%),
-    #000;
+.secret-lights {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+  .secret-lights .light {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    mix-blend-mode: screen;
+    opacity: 0; /* Standard: unsichtbar */
+    will-change: transform, opacity;
+  }
+
+/* Jeder Punkt: eigene Position, Größe, Farbe, Timing.
+   Lange Dauer + kurzer Peak in den Keyframes = meistens dunkel. */
+.light-1 {
+  width: 40vw;
+  height: 40vw;
+  top: 8%;
+  left: 60%;s
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.55), transparent 5%);
+  /* animation: drift-1 21s ease-in-out infinite, flare 14s ease-in-out infinite; */
+}
+
+.light-2 {
+  width: 36vw;
+  height: 36vw;
+  top: 64%;
+  left: 6%;
+  background: radial-gradient(circle, rgba(243, 226, 222, 0.45), transparent 70%);
+  animation: drift-2 27s ease-in-out infinite, flare 18s ease-in-out -5s infinite;
+}
+
+.light-3 {
+  width: 28vw;
+  height: 28vw;
+  top: 30%;
+  left: 28%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.4), transparent 70%);
+  animation: drift-3 19s ease-in-out infinite, flare 11s ease-in-out -7s infinite;
+}
+
+.light-4 {
+  width: 32vw;
+  height: 32vw;
+  top: 12%;
+  left: 12%;
+  background: radial-gradient(circle, rgba(243, 226, 222, 0.32), transparent 70%);
+  animation: drift-1 24s ease-in-out infinite, flare 16s ease-in-out -11s infinite;
+}
+
+.light-5 {
+  width: 24vw;
+  height: 24vw;
+  top: 72%;
+  left: 66%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.45), transparent 70%);
+  animation: drift-2 17s ease-in-out infinite, flare 13s ease-in-out -3s infinite;
+}
+
+.light-6 {
+  width: 30vw;
+  height: 30vw;
+  top: 46%;
+  left: 82%;
+  background: radial-gradient(circle, rgba(243, 226, 222, 0.35), transparent 70%);
+  animation: drift-3 23s ease-in-out infinite, flare 20s ease-in-out -9s infinite;
+}
+
+/* Wander-Pfade */
+@keyframes drift-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-6vw, 5vh);
+  }
+
+  45% {
+    transform: translate(5vw, 9vh);
+  }
+
+  70% {
+    transform: translate(9vw, -4vh);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes drift-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  30% {
+    transform: translate(7vw, -6vh);
+  }
+
+  55% {
+    transform: translate(-5vw, -9vh);
+  }
+
+  80% {
+    transform: translate(-9vw, 4vh);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes drift-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-8vw, -5vh);
+  }
+
+  50% {
+    transform: translate(6vw, 7vh);
+  }
+
+  75% {
+    transform: translate(8vw, -6vh);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Aufblitzen: fast der ganze Zyklus ist 0 (dunkel),
+   nur ein kurzer Moment leuchtet auf */
+@keyframes flare {
+  0% {
+    opacity: 0;
+  }
+
+  46% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  54% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secret-lights .light {
+    opacity: 0.12;
+    animation: none;
+  }
 }
 
 .secret-page::before {
