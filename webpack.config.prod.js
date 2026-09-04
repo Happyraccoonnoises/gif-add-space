@@ -7,7 +7,7 @@ const htmlPages = [
   'index.html',
   'merch.html',
   'impressum.html',
-  'geheim.html',
+  'geheim.php',
   'gif.html',
   'FrequencyHub.html',
   'Display.html',

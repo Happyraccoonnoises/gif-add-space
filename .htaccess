@@ -1,19 +1,16 @@
 DirectoryIndex index.html
-
 Options -MultiViews
 
 RewriteEngine On
 
-# Alte URLs mit .html dauerhaft auf die kurze Schreibweise umleiten.
-RewriteCond %{THE_REQUEST} \s/+index\.html(?:[?\s]) [NC]
-RewriteRule ^index\.html$ / [R=301,L]
+# Unter / intern die Secret-Rave-Seite anzeigen.
+RewriteRule ^$ geheim.php [END]
 
-RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[?\s]) [NC]
-RewriteRule ^(.+)\.html$ /$1 [R=301,L,NE]
+# Statische Assets weiterhin ausliefern.
+RewriteRule \.(?:css|js|mjs|png|jpe?g|gif|svg|webp|avif|ico|bmp|apng|woff2?|ttf|otf|eot|mp4|webm|og[gv]|mp3|wav|m4a|aac|flac|json|webmanifest|wasm)$ - [NC,END]
 
-# Kurze URLs intern auf die vorhandenen HTML-Dateien abbilden.
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.+?)/?$ $1.html [L]
+# Alle anderen URLs auf / umleiten.
+RewriteRule ^ / [R=302,L]
 
-ErrorDocument 404 /404.html
+# Fehlende Assets als 404-Fehler behandeln.
+ErrorDocument 404 default

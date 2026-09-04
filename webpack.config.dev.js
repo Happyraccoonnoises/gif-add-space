@@ -14,7 +14,7 @@ module.exports = merge(common, {
         { from: /^\/index\/?$/, to: '/index.html' },
         { from: /^\/merch\/?$/, to: '/merch.html' },
         { from: /^\/impressum\/?$/, to: '/impressum.html' },
-        { from: /^\/geheim\/?$/, to: '/geheim.html' },
+        { from: /^\/geheim\/?$/, to: '/geheim.php' },
         { from: /^\/gif\/?$/, to: '/gif.html' },
         { from: /^\/FrequencyHub\/?$/, to: '/FrequencyHub.html' },
         { from: /^\/Display\/?$/, to: '/Display.html' },
